@@ -119,7 +119,6 @@
   "variables": {
     "vnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "subnet1Ref": "[concat(variables('vnetID'),'/subnets/', parameters('subnet1Name'))]"
-    "vmStorageAccountContainerName": "vhds",
     "availabilitySetName": "ARM07AvSet",
     "publicIPAddressType": "Dynamic",
     "publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))]",
