@@ -170,8 +170,8 @@
           ]
         },
         "subnets": [
-          {
-        "id": "[variables('subnet1Ref')]"
+          "id": "[variables('subnet1Ref')]"
+      }
           }
         ]
       }
