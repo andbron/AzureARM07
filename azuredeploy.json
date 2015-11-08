@@ -62,7 +62,7 @@
         "description": "Public IP Address Name"
       }
     },
-    "vnetName": {
+    "virtualNetworkName": {
       "type": "string",
       "metadata": {
         "description": "VNET name"
@@ -161,7 +161,7 @@
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/virtualNetworks",
-      "name": "[parameters('vnetName')]",
+      "name": "[parameters('virtualNetworkName')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "addressSpace": {
@@ -170,9 +170,11 @@
           ]
         },
         "subnets": [
+            "name": "[variables('subnetName')]",
+            "properties": {
+              "addressPrefix": "[variables('subnetPrefix')]"    
+              "id": "[variables('subnet1Ref')]"
           {
-          "id": "[variables('subnet1Ref')]"
-          }    
         ]
       }
     },
