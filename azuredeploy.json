@@ -119,7 +119,7 @@
   },
   "variables": {
     "vnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-    "subnet1Ref": "[concat(variables('vnetID'),'/subnets/', parameters('vnetName'))]"
+    "subnet1Ref": "[concat(variables('vnetID'),'/subnets/', parameters('vnetName'))]",
     "storageAccountType": "Standard_LRS",
     "vmStorageAccountContainerName": "vhds",
     "availabilitySetName": "myAvSet",
