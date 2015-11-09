@@ -122,7 +122,7 @@
     "subnet1Ref": "[concat(variables('vnetID'),'/subnets/', parameters('vnetName'))]",
     "storageAccountType": "Standard_LRS",
     "vmStorageAccountContainerName": "vhds",
-    "availabilitySetName": "myAvSet",
+    "availabilitySetName": "arm07avset",
     "publicIPAddressType": "Dynamic",
     "publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))]",
     "lbID": "[resourceId('Microsoft.Network/loadBalancers',parameters('lbName'))]",
