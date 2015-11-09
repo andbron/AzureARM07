@@ -22,14 +22,14 @@
     },
     "dnsNameforLBIP": {
       "type": "string",
-      "defaultValue": "ARM07LBIP",
+      "defaultValue": "uniqueDnsNameforLBIP",
       "metadata": {
         "description": "Unique DNS name"
       }
     },
     "vmNamePrefix": {
       "type": "string",
-      "defaultValue": "ARM07VM",
+      "defaultValue": "myVM",
       "metadata": {
         "description": "VM name prefix"
       }
@@ -43,7 +43,7 @@
     },
     "lbName": {
       "type": "string",
-      "defaultValue": "ARM07LB",
+      "defaultValue": "myLB",
       "metadata": {
         "description": "Load Balancer name"
       }
@@ -62,25 +62,26 @@
         "description": "Public IP Address Name"
       }
     },
-    "virtualNetworkName": {
-      "type": "string",
-      "metadata": {
-        "description": "VNET name"
+        "virtualNetworkName": {
+        "type": "string",
+        "metadata": {
+          "description": "VNET Name"
       }
     },
-   "virtualNetworkResourceGroup": {
-      "type": "string",
-      "metadata": {
-        "description": "Resource Group VNET is deployed in"
+      "virtualNetworkResourceGroup": {
+        "type": "string",
+        "metadata": {
+          "description": "Resource Group VNET is deployed in"
       }
     },
-    "subnet1Name": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of the subnet inside the VNET"
+      "vnetName": {
+        "type": "string",
+        "defaultValue": "ab-subnet-vm-tmp01",
+        "metadata": {
+          "description": "Name of the subnet inside the VNET"
       }
-    },    
-    "imagePublisher": {
+    }, 
+      "imagePublisher": {
       "type": "string",
       "defaultValue": "MicrosoftWindowsServer",
       "metadata": {
@@ -118,11 +119,16 @@
   },
   "variables": {
     "vnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-    "subnet1Ref": "[concat(variables('vnetID'),'/subnets/', parameters('subnet1Name'))]",
+    "subnet1Ref": "[concat(variables('vnetID'),'/subnets/', parameters('vnetName'))]"
     "storageAccountType": "Standard_LRS",
     "vmStorageAccountContainerName": "vhds",
-    "availabilitySetName": "ARM07AvSet",
+    "availabilitySetName": "myAvSet",
+    "addressPrefix": "10.1.0.0/16",
+    "subnetName": "ab-subnet-vm-tmp11",
+    "subnetPrefix": "10.1.11.0/24",
     "publicIPAddressType": "Dynamic",
+    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('vnetName'))]",
+    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables ('subnetName'))]",
     "publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))]",
     "lbID": "[resourceId('Microsoft.Network/loadBalancers',parameters('lbName'))]",
     "numberOfInstances": 2,
@@ -159,7 +165,7 @@
       }
     },
     {
-     "apiVersion": "2015-05-01-preview",
+      "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[concat(parameters('nicNamePrefix'), copyindex())]",
       "location": "[resourceGroup().location]",
@@ -168,7 +174,6 @@
         "count": "[variables('numberOfInstances')]"
       },
       "dependsOn": [
-        "[concat('Microsoft.Network/virtualNetworks/', parameters('vnetID'))]",
         "[concat('Microsoft.Network/loadBalancers/', parameters('lbName'))]"
       ],
       "properties": {
@@ -178,7 +183,7 @@
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
-                "id": "[variables('subnet1Ref')]"
+                "id": "[variables('subnetRef')]"
               },
               "loadBalancerBackendAddressPools": [
                 {
