@@ -9,9 +9,3 @@ Subnet - ab-subnet-vm-tmp01
 
 The template uses resource loops capability to create the network interfaces and virtual machines
 
-The configuration file uses the following....
-
-Resource Group - andbron-austse-rg-ARM07 (manually add tags - AutoShutdownSchedule) 
-Storage Account - andbronstorAzureARM07 
-Existing Subnet - ab-subnet-vm-tmp01
-JSON Template - AzureARM07 variables
