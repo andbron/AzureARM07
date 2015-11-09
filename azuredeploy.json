@@ -183,7 +183,7 @@
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
-                "id": "[variables('subnetRef')]"
+                "id": "[variables('subnet1Ref')]"
               },
               "loadBalancerBackendAddressPools": [
                 {
