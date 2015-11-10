@@ -29,7 +29,7 @@
     },
     "vmNamePrefix": {
       "type": "string",
-      "defaultValue": "myVM",
+      "defaultValue": "arm07vm",
       "metadata": {
         "description": "VM name prefix"
       }
